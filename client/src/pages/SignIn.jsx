@@ -1,3 +1,3 @@
 export default function SignInPage() {
-  return <div>SignIn</div>;
+  return <div className="min-h-screen">SignIn</div>;
 }
