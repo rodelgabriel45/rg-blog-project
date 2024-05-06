@@ -9,10 +9,10 @@ export default function Header() {
   return (
     <Navbar className="border-b-2 p-4">
       <Link to={"/"} className="text-lg font-bold sm:text-xl ">
-        <span className=" px-2 py-1 bg-gradient-to-l from-[#5B89AE] via-[#ADC4D7] to-[#D3D2C7] rounded-md hover:bg-gradient-to-r shadow-md">
-          RDot
+        <span className="text-white px-5 py-1 bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 rounded-lg hover:bg-gradient-to-r shadow-md">
+          Test
         </span>
-        Blog
+        Project
       </Link>
       <form>
         <TextInput
