@@ -5,14 +5,21 @@ import SignInPage from "./pages/SignIn";
 import ProjectsPage from "./pages/Projects";
 import AboutPage from "./pages/About";
 import DashboardPage from "./pages/Dashboard";
+import NavRootLayout from "./pages/NavRoot";
 
 const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
-  { path: "/signup", element: <SignUpPage /> },
-  { path: "/signin", element: <SignInPage /> },
-  { path: "/dashboard", element: <DashboardPage /> },
-  { path: "/projects", element: <ProjectsPage /> },
-  { path: "/about", element: <AboutPage /> },
+  {
+    path: "/",
+    element: <NavRootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "/signup", element: <SignUpPage /> },
+      { path: "/signin", element: <SignInPage /> },
+      { path: "/dashboard", element: <DashboardPage /> },
+      { path: "/projects", element: <ProjectsPage /> },
+      { path: "/about", element: <AboutPage /> },
+    ],
+  },
 ]);
 
 function App() {
