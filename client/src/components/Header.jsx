@@ -1,11 +1,15 @@
 import { Button, Navbar, TextInput, Avatar, Dropdown } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { HiOutlineSearch } from "react-icons/hi";
 import { IoMoon } from "react-icons/io5";
+import { FaRegSun } from "react-icons/fa";
+import { toggleTheme } from "../store/theme/themeSlice";
 
 export default function Header() {
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname;
 
@@ -29,8 +33,13 @@ export default function Header() {
         <HiOutlineSearch />
       </Button>
       <div className="flex gap-2 md:order-2">
-        <Button className="w-12 hidden sm:inline" color="gray" pill>
-          <IoMoon />
+        <Button
+          onClick={() => dispatch(toggleTheme())}
+          className=" hidden sm:inline"
+          color="gray"
+          pill
+        >
+          {theme === "light" ? <IoMoon size={16} /> : <FaRegSun size={16} />}
         </Button>
 
         {currentUser ? (
