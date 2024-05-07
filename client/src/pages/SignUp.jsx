@@ -1,6 +1,7 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -128,6 +129,7 @@ export default function SignUpPage() {
                 "Sign Up"
               )}
             </Button>
+            <OAuth />
           </form>
           {error && (
             <p className="text-red-500 font-semibold mt-3">

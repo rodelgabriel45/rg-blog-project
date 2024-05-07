@@ -8,6 +8,7 @@ import {
   requestSuccess,
   requestFailure,
 } from "../store/user/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function SignInPage() {
   const dispatch = useDispatch();
@@ -103,6 +104,7 @@ export default function SignInPage() {
                 "Sign In"
               )}
             </Button>
+            <OAuth />
           </form>
           {error && (
             <p className="text-red-500 font-semibold mt-3">
