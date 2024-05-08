@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { HiOutlineExclamationCircle, HiUser } from "react-icons/hi";
 import { HiArrowSmRight } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { requestFailure, clearState } from "../store/user/userSlice";
 
 export default function SidebarDash() {
+  const { currentUser } = useSelector((state) => state.user);
   const location = useLocation();
   const dispatch = useDispatch();
   const [tab, setTab] = useState("");
@@ -45,7 +46,7 @@ export default function SidebarDash() {
               href="/dashboard?tab=profile"
               active={tab === "profile"}
               icon={HiUser}
-              label={"User"}
+              label={currentUser.isAdmin === true ? "Admin" : "User"}
               labelColor="dark"
               className="cursor-pointer"
             >
