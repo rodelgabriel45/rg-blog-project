@@ -1,5 +1,5 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,6 +7,7 @@ import {
   requestStart,
   requestSuccess,
   requestFailure,
+  clearError,
 } from "../store/user/userSlice";
 import OAuth from "../components/OAuth";
 
@@ -18,6 +19,18 @@ export default function SignInPage() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        dispatch(clearError());
+      }, 4000);
+    }
+
+    return () => {
+      clearTimeout();
+    };
+  }, [error]);
 
   const handleChange = (e) => {
     setFormData({
