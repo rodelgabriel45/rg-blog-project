@@ -8,6 +8,8 @@ import DashboardPage from "./pages/Dashboard";
 import NavRootLayout from "./pages/NavRoot";
 import FooterRootLayout from "./pages/FooterRoot";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminPrivateRoute from "./components/AdminPrivateRoute";
+import CreatePost from "./pages/CreatePost";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,10 @@ const router = createBrowserRouter([
             element: <PrivateRoute />,
             children: [{ path: "/dashboard", element: <DashboardPage /> }],
           },
-
+          {
+            element: <AdminPrivateRoute />,
+            children: [{ path: "/create-post", element: <CreatePost /> }],
+          },
           { path: "/projects", element: <ProjectsPage /> },
           { path: "/about", element: <AboutPage /> },
         ],
