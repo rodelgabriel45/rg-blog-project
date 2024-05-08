@@ -24,6 +24,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const uploadInput = useRef();
   const [showModal, setShowModal] = useState(false);
+  const [popUpType, setPopUpType] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [fileUploadPerc, setFileUploadPerc] = useState(null);
@@ -143,6 +144,16 @@ export default function Profile() {
     }
   };
 
+  const handleDeleteStart = () => {
+    setShowModal(true);
+    setPopUpType("delete");
+  };
+
+  const handleSignoutStart = () => {
+    setShowModal(true);
+    setPopUpType("signout");
+  };
+
   const handleDeleteUser = async () => {
     setShowModal(false);
     try {
@@ -150,6 +161,23 @@ export default function Profile() {
         method: "DELETE",
       });
 
+      const resData = await response.json();
+
+      if (!response.ok) {
+        dispatch(requestFailure(resData));
+        return;
+      }
+
+      dispatch(clearState());
+    } catch (error) {
+      dispatch(requestFailure(error));
+    }
+  };
+
+  const handleSignoutUser = async () => {
+    setShowModal(false);
+    try {
+      const response = await fetch("/api/auth/signout");
       const resData = await response.json();
 
       if (!response.ok) {
@@ -246,12 +274,15 @@ export default function Profile() {
       {error && <p className="text-red-500 mt-2">{error.message}</p>}
       <div className="flex justify-between mt-3">
         <span
-          onClick={() => setShowModal(true)}
+          onClick={handleDeleteStart}
           className="text-red-500 cursor-pointer hover:opacity-70"
         >
           Delete Account
         </span>
-        <span className="text-red-500 cursor-pointer hover:opacity-70">
+        <span
+          onClick={handleSignoutStart}
+          className="text-red-500 cursor-pointer hover:opacity-70"
+        >
           Sign Out
         </span>
       </div>
@@ -267,10 +298,17 @@ export default function Profile() {
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
             <h3 className="mb-5 text-lg font-semibold text-gray-600 dark:text-gray-400">
-              This account will be deleted permanently. Are you sure?
+              {popUpType === "delete"
+                ? "This account will be deleted permanently. Are you sure?"
+                : "Are you sure you want to logout now?"}
             </h3>
             <div className="flex justify-center gap-7">
-              <Button onClick={handleDeleteUser} color="failure">
+              <Button
+                onClick={
+                  popUpType === "delete" ? handleDeleteUser : handleSignoutUser
+                }
+                color="failure"
+              >
                 {"Yes, I'm sure"}
               </Button>
               <Button color="gray" onClick={() => setShowModal(false)}>
