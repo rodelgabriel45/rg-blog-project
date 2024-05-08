@@ -1,6 +1,6 @@
 import { Alert, Button, TextInput } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import {
@@ -11,15 +11,23 @@ import {
 } from "firebase/storage";
 
 import { app } from "../firebase";
+import {
+  requestStart,
+  requestSuccess,
+  requestFailure,
+  clearError,
+} from "../store/user/userSlice";
 
 export default function Profile() {
+  const dispatch = useDispatch();
   const uploadInput = useRef();
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [fileUploadPerc, setFileUploadPerc] = useState(null);
   const [fileUploadErr, setFileUploadErr] = useState(false);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [formData, setFormData] = useState({});
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
 
   const handleSelectImage = (e) => {
     const image = e.target.files[0];
@@ -40,10 +48,22 @@ export default function Profile() {
       }, 3000);
     }
 
+    if (updateSuccess) {
+      setTimeout(() => {
+        setUpdateSuccess(false);
+      }, 3000);
+    }
+
+    if (error) {
+      setTimeout(() => {
+        dispatch(clearError());
+      }, 4000);
+    }
+
     return () => {
       clearTimeout();
     };
-  }, [fileUploadErr, fileUploadPerc]);
+  }, [fileUploadErr, fileUploadPerc, updateSuccess, error]);
 
   useEffect(() => {
     if (imageFile) {
@@ -88,6 +108,31 @@ export default function Profile() {
       ...formData,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const handleUpdateProfile = async () => {
+    try {
+      dispatch(requestStart());
+      const response = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        dispatch(requestFailure(resData));
+        return;
+      }
+
+      dispatch(requestSuccess(resData));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(requestFailure(error));
+    }
   };
 
   return (
@@ -158,10 +203,20 @@ export default function Profile() {
           id="password"
           placeholder="Password"
         />
-        <Button type="submit" gradientDuoTone="purpleToBlue" outline>
-          Update
+        <Button
+          disabled={loading}
+          onClick={handleUpdateProfile}
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          outline
+        >
+          {loading ? "Updating..." : "Update"}
         </Button>
       </form>
+      {updateSuccess && (
+        <p className="text-green-500 mt-2">Update Successfull!</p>
+      )}
+      {error && <p className="text-red-500 mt-2">{error.message}</p>}
       <div className="flex justify-between mt-3">
         <span className="text-red-500 cursor-pointer hover:opacity-70">
           Delete Account
