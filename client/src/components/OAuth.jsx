@@ -12,8 +12,6 @@ export default function OAuth() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
 
-  console.log(currentUser);
-
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });

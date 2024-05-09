@@ -10,6 +10,7 @@ import FooterRootLayout from "./pages/FooterRoot";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import CreatePost from "./pages/CreatePost";
+import PostDetails from "./pages/PostDetails";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
           },
           { path: "/projects", element: <ProjectsPage /> },
           { path: "/about", element: <AboutPage /> },
+          { path: "/post/:postSlug", element: <PostDetails /> },
         ],
       },
     ],

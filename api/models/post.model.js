@@ -20,7 +20,7 @@ const postSchema = new mongoose.Schema(
       default:
         "https://www.salesforce.com/ca/blog/wp-content/uploads/sites/12/2023/10/anatomy-of-a-blog-post-deconstructed-header.jpg",
     },
-    content: {
+    category: {
       type: String,
       default: "uncategorized",
     },
