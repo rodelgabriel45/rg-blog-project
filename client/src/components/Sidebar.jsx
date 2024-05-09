@@ -1,6 +1,10 @@
 import { Button, Modal, Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { HiOutlineExclamationCircle, HiUser } from "react-icons/hi";
+import {
+  HiDocumentText,
+  HiOutlineExclamationCircle,
+  HiUser,
+} from "react-icons/hi";
 import { HiArrowSmRight } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,17 +45,31 @@ export default function SidebarDash() {
     <>
       <Sidebar>
         <Sidebar.Items>
-          <Sidebar.ItemGroup>
-            <Sidebar.Item
-              href="/dashboard?tab=profile"
-              active={tab === "profile"}
-              icon={HiUser}
-              label={currentUser.isAdmin === true ? "Admin" : "User"}
-              labelColor="dark"
-              className="cursor-pointer"
-            >
-              Profile
-            </Sidebar.Item>
+          <Sidebar.ItemGroup className="flex flex-col gap-1">
+            <Link to="/dashboard?tab=profile">
+              <Sidebar.Item
+                active={tab === "profile"}
+                icon={HiUser}
+                label={currentUser.isAdmin === true ? "Admin" : "User"}
+                labelColor="dark"
+                className="cursor-pointer"
+                as="div"
+              >
+                Profile
+              </Sidebar.Item>
+            </Link>
+
+            {currentUser?.isAdmin && (
+              <Link to="/dashboard?tab=posts">
+                <Sidebar.Item
+                  active={tab === "posts"}
+                  icon={HiDocumentText}
+                  as="div"
+                >
+                  Posts
+                </Sidebar.Item>
+              </Link>
+            )}
 
             <Sidebar.Item
               onClick={() => setShowModal(true)}
