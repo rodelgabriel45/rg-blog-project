@@ -34,7 +34,6 @@ export default function CreatePost() {
     title: "",
     content: "",
     category: "uncategorized",
-    image: null,
   });
 
   useEffect(() => {
