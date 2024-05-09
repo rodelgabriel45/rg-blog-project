@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
+import UpdatePost from "./pages/UpdatePost";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,10 @@ const router = createBrowserRouter([
           },
           {
             element: <AdminPrivateRoute />,
-            children: [{ path: "/create-post", element: <CreatePost /> }],
+            children: [
+              { path: "/create-post", element: <CreatePost /> },
+              { path: "/update-post/:id", element: <UpdatePost /> },
+            ],
           },
           { path: "/projects", element: <ProjectsPage /> },
           { path: "/about", element: <AboutPage /> },
