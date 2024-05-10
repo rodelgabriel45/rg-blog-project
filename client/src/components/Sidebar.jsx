@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   HiDocumentText,
   HiOutlineExclamationCircle,
+  HiOutlineUsers,
   HiUser,
 } from "react-icons/hi";
 import { HiArrowSmRight } from "react-icons/hi";
@@ -67,6 +68,18 @@ export default function SidebarDash() {
                   as="div"
                 >
                   Posts
+                </Sidebar.Item>
+              </Link>
+            )}
+
+            {currentUser?.isAdmin && (
+              <Link to="/dashboard?tab=users">
+                <Sidebar.Item
+                  active={tab === "users"}
+                  icon={HiOutlineUsers}
+                  as="div"
+                >
+                  Users
                 </Sidebar.Item>
               </Link>
             )}

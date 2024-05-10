@@ -92,7 +92,7 @@ export const deletePost = async (req, res, next) => {
 
   if (!post) return next(errorHandler(404, "Post not found!"));
 
-  if (req.user.id !== post.userId)
+  if (!req.user.isAdmin || req.user.id !== post.userId)
     return next(errorHandler(401, "Unauthorized to delete this post."));
 
   try {
@@ -108,8 +108,14 @@ export const updatePost = async (req, res, next) => {
 
   if (!post) return next(errorHandler(404, "Post not found!"));
 
-  if (req.user.id !== post.userId)
+  if (!req.user.isAdmin || req.user.id !== post.userId)
     return next(errorHandler(401, "Unauthorized to update this post."));
+
+  if (req.body.title.trim().length < 7) {
+    return next(
+      errorHandler(400, "The title must be atleast 7 characters long.")
+    );
+  }
 
   const slug = req.body.title
     .split(" ")

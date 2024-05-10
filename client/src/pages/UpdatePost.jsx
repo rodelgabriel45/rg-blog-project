@@ -31,11 +31,7 @@ export default function UpdatePost() {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [publishErr, setPublishErr] = useState(null);
   const [uploadErr, setUploadErr] = useState(null);
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    category: "uncategorized",
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -172,7 +168,7 @@ export default function UpdatePost() {
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
             }
-            defaultValue={formData.category}
+            value={formData.category}
           >
             <option value="uncategorized">Select a category</option>
             <option value="javascript">JavaScript</option>
