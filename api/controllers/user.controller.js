@@ -1,5 +1,4 @@
 import bcryptjs from "bcryptjs";
-import { validate } from "email-validator";
 import validator from "email-validator";
 
 import { errorHandler } from "../utils/error.js";
@@ -112,6 +111,19 @@ export const getUsers = async (req, res, next) => {
     res
       .status(200)
       .json({ users: usersWithoutPassword, totalUsers, lastMonthUsers });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return next(errorHandler(404, "User not found!"));
+
+    const { password: pass, ...rest } = user._doc;
+
+    res.status(200).json(rest);
   } catch (error) {
     next(error);
   }

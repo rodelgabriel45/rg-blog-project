@@ -2,6 +2,7 @@ import { Button, Spinner, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Comment from "./Comment";
 
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -9,7 +10,25 @@ export default function CommentSection({ postId }) {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
   const [commentSuccess, setCommentSuccess] = useState(false);
-  const [resComment, setResComment] = useState({});
+  const [postComments, setPostComments] = useState([]);
+
+  useEffect(() => {
+    const fetchPostComments = async () => {
+      const response = await fetch(`/api/comment/getPostComments/${postId}`);
+      const resData = await response.json();
+
+      if (!response.ok) {
+        console.log(resData);
+        return;
+      }
+
+      setPostComments(resData);
+    };
+
+    fetchPostComments();
+  }, [commentSuccess]);
+
+  console.log(postComments);
 
   useEffect(() => {
     if (commentErr) {
@@ -60,7 +79,7 @@ export default function CommentSection({ postId }) {
 
     setLoading(false);
     setCommentSuccess(true);
-    setResComment(resData);
+    setPostComments([data, ...postComments]);
     setComment("");
   };
 
@@ -134,6 +153,21 @@ export default function CommentSection({ postId }) {
             </Button>
           </div>
         </form>
+      )}
+      {postComments.length === 0 ? (
+        <p className="font-medium my-5">No comments yet!</p>
+      ) : (
+        <>
+          <div className="flex gap-2 text-sm items-center mt-3">
+            <p>Comments</p>
+            <div className="border border-teal-500 px-2 rounded-sm">
+              <p>{postComments.length}</p>
+            </div>
+          </div>
+          {postComments.map((comment) => {
+            return <Comment key={comment._id} comment={comment} />;
+          })}
+        </>
       )}
     </div>
   );
