@@ -77,9 +77,9 @@ export default function CommentSection({ postId }) {
     }
 
     setLoading(false);
+    setComment("");
     setCommentSuccess(true);
     setPostComments([data, ...postComments]);
-    setComment("");
   };
 
   const handleLike = async (commentId) => {
@@ -108,6 +108,14 @@ export default function CommentSection({ postId }) {
               numberOfLikes: resData.likes.length,
             }
           : comment
+      )
+    );
+  };
+
+  const handleEdit = async (comment, editedComment) => {
+    setPostComments(
+      postComments.map((c) =>
+        c._id === comment._id ? { ...c, content: editedComment } : c
       )
     );
   };
@@ -196,6 +204,7 @@ export default function CommentSection({ postId }) {
           {postComments.map((comment) => {
             return (
               <Comment
+                onEdit={handleEdit}
                 onClickLike={handleLike}
                 key={comment?._id}
                 comment={comment}
