@@ -4,12 +4,30 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CallToAction from "../components/CallToAction";
 import CommentSection from "../components/CommentSection";
+import PostCard from "../components/PostCard";
 
 export default function PostDetails() {
   const { postSlug } = useParams();
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [recentPosts, setRecentPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchRecentArticles = async () => {
+      const response = await fetch("/api/post/getposts?limit=3");
+      const resData = await response.json();
+
+      if (!response.ok) {
+        console.log(resData);
+        return;
+      }
+
+      setRecentPosts(resData.posts);
+    };
+
+    fetchRecentArticles();
+  }, []);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -65,6 +83,14 @@ export default function PostDetails() {
         <CallToAction />
       </div>
       <CommentSection postId={post._id} />
+      <div className="flex flex-col justify-center items-center mb-5">
+        <h1 className="text-xl mt-5 mb-5">Recent Articles</h1>
+        <div className="flex flex-wrap justify-center gap-5 mt-5">
+          {recentPosts?.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
