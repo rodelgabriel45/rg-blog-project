@@ -120,6 +120,29 @@ export default function CommentSection({ postId }) {
     );
   };
 
+  const handleDeleteComment = async (commentId) => {
+    const proceed = window.confirm(
+      "Are you sure you want to delete this comment permanently?"
+    );
+
+    if (proceed) {
+      const response = await fetch(`/api/comment/deleteComment/${commentId}`, {
+        method: "DELETE",
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        console.log(resData);
+        return;
+      }
+
+      setPostComments(
+        postComments.filter((postComment) => postComment._id !== commentId)
+      );
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
       {currentUser ? (
@@ -204,6 +227,7 @@ export default function CommentSection({ postId }) {
           {postComments.map((comment) => {
             return (
               <Comment
+                onDelete={handleDeleteComment}
                 onEdit={handleEdit}
                 onClickLike={handleLike}
                 key={comment?._id}

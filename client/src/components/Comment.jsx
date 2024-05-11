@@ -4,7 +4,7 @@ import { FaThumbsUp } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react";
 
-export default function Comment({ comment, onClickLike, onEdit }) {
+export default function Comment({ comment, onClickLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});
   const { currentUser } = useSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState(false);
@@ -55,7 +55,10 @@ export default function Comment({ comment, onClickLike, onEdit }) {
     <div className="flex p-4 border-b dark:border-gray-600">
       <div className="flex-shrink-0 mr-3">
         <img
-          src={user?.avatar}
+          src={
+            user?.avatar ||
+            "https://t3.ftcdn.net/jpg/03/64/62/36/360_F_364623623_ERzQYfO4HHHyawYkJ16tREsizLyvcaeg.jpg"
+          }
           alt="Avatar"
           className="w-10 h-10 rounded-full"
         />
@@ -63,7 +66,7 @@ export default function Comment({ comment, onClickLike, onEdit }) {
       <div className="flex-1">
         <div className="flex items-center">
           <span className="font-bold mr-1 text-xs truncate">
-            {user ? `@${user.username}` : "anonymous user"}
+            @{user.username || "anonymous-user"}
           </span>
           <span className="text-gray-500 text-sm">
             {moment(comment.createdAt).fromNow()}
@@ -127,6 +130,15 @@ export default function Comment({ comment, onClickLike, onEdit }) {
                   Edit
                 </button>
               )}
+              {currentUser &&
+                (currentUser._id === comment.userId || currentUser.isAdmin) && (
+                  <button
+                    onClick={() => onDelete(comment._id)}
+                    className="text-sm text-gray-400 hover:text-blue-500"
+                  >
+                    Delete
+                  </button>
+                )}
             </div>
           </>
         )}

@@ -38,8 +38,6 @@ export default function DashPosts() {
     fetchUsers();
   }, []);
 
-  console.log(users);
-
   const handleShowMore = async () => {
     const startIndex = users.length;
 
