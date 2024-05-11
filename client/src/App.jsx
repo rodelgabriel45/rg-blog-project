@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  ScrollRestoration,
+} from "react-router-dom";
 import HomePage from "./pages/Home";
 import SignUpPage from "./pages/SignUp";
 import SignInPage from "./pages/SignIn";
@@ -13,32 +18,44 @@ import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import UpdatePost from "./pages/UpdatePost";
 
+const AppLayout = () => (
+  <>
+    <ScrollRestoration />
+    <Outlet />
+  </>
+);
+
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <NavRootLayout />,
+    element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <FooterRootLayout />,
+        element: <NavRootLayout />,
         children: [
-          { index: true, element: <HomePage /> },
-          { path: "/signup", element: <SignUpPage /> },
-          { path: "/signin", element: <SignInPage /> },
           {
-            element: <PrivateRoute />,
-            children: [{ path: "/dashboard", element: <DashboardPage /> }],
-          },
-          {
-            element: <AdminPrivateRoute />,
+            path: "/",
+            element: <FooterRootLayout />,
             children: [
-              { path: "/create-post", element: <CreatePost /> },
-              { path: "/update-post/:id", element: <UpdatePost /> },
+              { index: true, element: <HomePage /> },
+              { path: "/signup", element: <SignUpPage /> },
+              { path: "/signin", element: <SignInPage /> },
+              {
+                element: <PrivateRoute />,
+                children: [{ path: "/dashboard", element: <DashboardPage /> }],
+              },
+              {
+                element: <AdminPrivateRoute />,
+                children: [
+                  { path: "/create-post", element: <CreatePost /> },
+                  { path: "/update-post/:id", element: <UpdatePost /> },
+                ],
+              },
+              { path: "/projects", element: <ProjectsPage /> },
+              { path: "/about", element: <AboutPage /> },
+              { path: "/post/:postSlug", element: <PostDetails /> },
             ],
           },
-          { path: "/projects", element: <ProjectsPage /> },
-          { path: "/about", element: <AboutPage /> },
-          { path: "/post/:postSlug", element: <PostDetails /> },
         ],
       },
     ],

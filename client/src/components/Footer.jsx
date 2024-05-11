@@ -4,6 +4,7 @@ import { FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { BiLogoGmail } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 export default function FooterComp() {
   return (
@@ -19,8 +20,8 @@ export default function FooterComp() {
           <div>
             <Footer.Title title="about" />
             <Footer.LinkGroup col>
-              <Footer.Link className="cursor-pointer">
-                Example link 1
+              <Footer.Link className="cursor-pointer" as="div">
+                <Link to="/about">Example link 1</Link>
               </Footer.Link>
               <Footer.Link className="cursor-pointer">
                 Example link 2
