@@ -1,10 +1,11 @@
 import { Button, Spinner, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 
 export default function CommentSection({ postId }) {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const [commentErr, setCommentErr] = useState(null);
   const [comment, setComment] = useState("");
@@ -27,8 +28,6 @@ export default function CommentSection({ postId }) {
 
     fetchPostComments();
   }, [commentSuccess]);
-
-  console.log(postComments);
 
   useEffect(() => {
     if (commentErr) {
@@ -81,6 +80,36 @@ export default function CommentSection({ postId }) {
     setCommentSuccess(true);
     setPostComments([data, ...postComments]);
     setComment("");
+  };
+
+  const handleLike = async (commentId) => {
+    if (!currentUser) {
+      navigate("/signin");
+      return;
+    }
+
+    const response = await fetch(`/api/comment/likeComment/${commentId}`, {
+      method: "PUT",
+    });
+
+    const resData = await response.json();
+
+    if (!response.ok) {
+      console.log(resData);
+      return;
+    }
+
+    setPostComments(
+      postComments.map((comment) =>
+        comment._id === commentId
+          ? {
+              ...comment,
+              likes: resData.likes,
+              numberOfLikes: resData.likes.length,
+            }
+          : comment
+      )
+    );
   };
 
   return (
@@ -165,7 +194,13 @@ export default function CommentSection({ postId }) {
             </div>
           </div>
           {postComments.map((comment) => {
-            return <Comment key={comment._id} comment={comment} />;
+            return (
+              <Comment
+                onClickLike={handleLike}
+                key={comment?._id}
+                comment={comment}
+              />
+            );
           })}
         </>
       )}
