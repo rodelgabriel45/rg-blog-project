@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { requestFailure, clearState } from "../store/user/userSlice";
 import { FaComments } from "react-icons/fa";
+import { AiFillDashboard } from "react-icons/ai";
 
 export default function SidebarDash() {
   const { currentUser } = useSelector((state) => state.user);
@@ -58,6 +59,16 @@ export default function SidebarDash() {
                 as="div"
               >
                 Profile
+              </Sidebar.Item>
+            </Link>
+
+            <Link to="/dashboard?tab=dashboard">
+              <Sidebar.Item
+                active={tab === "dashboard"}
+                icon={AiFillDashboard}
+                as="div"
+              >
+                Dashboard
               </Sidebar.Item>
             </Link>
 
