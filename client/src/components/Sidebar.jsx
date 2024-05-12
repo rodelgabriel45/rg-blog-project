@@ -62,18 +62,18 @@ export default function SidebarDash() {
               </Sidebar.Item>
             </Link>
 
-            <Link to="/dashboard?tab=dashboard">
-              <Sidebar.Item
-                active={tab === "dashboard"}
-                icon={AiFillDashboard}
-                as="div"
-              >
-                Dashboard
-              </Sidebar.Item>
-            </Link>
-
             {currentUser?.isAdmin && (
               <>
+                <Link to="/dashboard?tab=dashboard">
+                  <Sidebar.Item
+                    active={tab === "dashboard"}
+                    icon={AiFillDashboard}
+                    as="div"
+                  >
+                    Dashboard
+                  </Sidebar.Item>
+                </Link>
+
                 <Link to="/dashboard?tab=posts">
                   <Sidebar.Item
                     active={tab === "posts"}

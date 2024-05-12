@@ -181,7 +181,7 @@ export default function DashboardComponent() {
             <h1 className="text-center p-2">Recent Posts</h1>
             <Link to="/dashboard?tab=posts">
               <Button gradientDuoTone="purpleToBlue" outline>
-                See All
+                See Posts
               </Button>
             </Link>
           </div>
@@ -202,7 +202,11 @@ export default function DashboardComponent() {
                         />
                       </Table.Cell>
                       <Table.Cell className="w-96">
-                        <p className="font-medium line-clamp-2">{post.title}</p>
+                        <Link to={`/post/${post.slug}`}>
+                          <p className="font-medium line-clamp-2">
+                            {post.title}
+                          </p>
+                        </Link>
                       </Table.Cell>
                     </Table.Row>
                   </Table.Body>
@@ -214,7 +218,7 @@ export default function DashboardComponent() {
         {/* Recent Comments */}
         <div className="flex flex-col w-full lg:w-auto shadow-md p-2 rounded-md dark:bg-gray-800">
           <div className="flex justify-between p-3 text-sm font-semibold">
-            <h1 className="text-center p-2">Recent Users</h1>
+            <h1 className="text-center p-2">Recent Comments</h1>
             <Link to="/dashboard?tab=comments">
               <Button gradientDuoTone="purpleToBlue" outline>
                 See All
