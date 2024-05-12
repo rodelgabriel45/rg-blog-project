@@ -11,6 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { requestFailure, clearState } from "../store/user/userSlice";
+import { FaComments } from "react-icons/fa";
 
 export default function SidebarDash() {
   const { currentUser } = useSelector((state) => state.user);
@@ -61,27 +62,36 @@ export default function SidebarDash() {
             </Link>
 
             {currentUser?.isAdmin && (
-              <Link to="/dashboard?tab=posts">
-                <Sidebar.Item
-                  active={tab === "posts"}
-                  icon={HiDocumentText}
-                  as="div"
-                >
-                  Posts
-                </Sidebar.Item>
-              </Link>
-            )}
+              <>
+                <Link to="/dashboard?tab=posts">
+                  <Sidebar.Item
+                    active={tab === "posts"}
+                    icon={HiDocumentText}
+                    as="div"
+                  >
+                    Posts
+                  </Sidebar.Item>
+                </Link>
+                <Link to="/dashboard?tab=users">
+                  <Sidebar.Item
+                    active={tab === "users"}
+                    icon={HiOutlineUsers}
+                    as="div"
+                  >
+                    Users
+                  </Sidebar.Item>
+                </Link>
 
-            {currentUser?.isAdmin && (
-              <Link to="/dashboard?tab=users">
-                <Sidebar.Item
-                  active={tab === "users"}
-                  icon={HiOutlineUsers}
-                  as="div"
-                >
-                  Users
-                </Sidebar.Item>
-              </Link>
+                <Link to="/dashboard?tab=comments">
+                  <Sidebar.Item
+                    active={tab === "comments"}
+                    icon={FaComments}
+                    as="div"
+                  >
+                    Comments
+                  </Sidebar.Item>
+                </Link>
+              </>
             )}
 
             <Sidebar.Item
