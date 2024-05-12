@@ -17,6 +17,7 @@ import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import UpdatePost from "./pages/UpdatePost";
+import Search from "./pages/Search";
 
 const AppLayout = () => (
   <>
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
               { path: "/projects", element: <ProjectsPage /> },
               { path: "/about", element: <AboutPage /> },
               { path: "/post/:postSlug", element: <PostDetails /> },
+              { path: "/search", element: <Search /> },
             ],
           },
         ],

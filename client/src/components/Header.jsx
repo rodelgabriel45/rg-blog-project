@@ -6,23 +6,26 @@ import {
   Dropdown,
   Modal,
 } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { HiOutlineExclamationCircle, HiOutlineSearch } from "react-icons/hi";
 import { IoMoon } from "react-icons/io5";
 import { FaRegSun } from "react-icons/fa";
 import { toggleTheme } from "../store/theme/themeSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { requestFailure, clearState } from "../store/user/userSlice";
 
 export default function Header() {
+  const navigate = useNavigate();
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname;
+  const location = useLocation();
   const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSignoutUser = async () => {
     setShowModal(false);
@@ -41,6 +44,25 @@ export default function Header() {
     }
   };
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+
+    navigate(`/search?${searchQuery}`);
+  };
+
   return (
     <>
       <Navbar className="border-b-2 p-4">
@@ -50,12 +72,14 @@ export default function Header() {
           </span>
           Project
         </Link>
-        <form>
+        <form onSubmit={handleSubmit}>
           <TextInput
             type="text"
             placeholder="Search..."
             rightIcon={HiOutlineSearch}
             className="hidden lg:inline"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </form>
         <Button className="w-12 lg:hidden" color="gray" pill>
