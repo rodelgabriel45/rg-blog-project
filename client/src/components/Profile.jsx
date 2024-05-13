@@ -263,7 +263,7 @@ export default function Profile() {
         <Button
           disabled={loading || imageUploading}
           type="submit"
-          gradientDuoTone="purpleToBlue"
+          gradientDuoTone="redToYellow"
           outline
         >
           {loading ? "Updating..." : "Update"}
@@ -272,7 +272,7 @@ export default function Profile() {
           <Link to={"/create-post"}>
             <Button
               type="button"
-              gradientDuoTone="purpleToPink"
+              gradientDuoTone="greenToBlue"
               className="w-full"
             >
               Create Post
@@ -287,13 +287,13 @@ export default function Profile() {
       <div className="flex justify-between mt-3">
         <span
           onClick={handleDeleteStart}
-          className="text-red-500 cursor-pointer hover:opacity-70"
+          className="text-red-500 cursor-pointer hover:opacity-70 hover:underline"
         >
           Delete Account
         </span>
         <span
           onClick={handleSignoutStart}
-          className="text-red-500 cursor-pointer hover:opacity-70"
+          className="text-red-500 cursor-pointer hover:opacity-70 hover:underline"
         >
           Sign Out
         </span>

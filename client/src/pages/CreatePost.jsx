@@ -172,7 +172,8 @@ export default function CreatePost() {
             disabled={uploadPerc}
             onClick={handleUploadImage}
             type="button"
-            gradientDuoTone="purpleToBlue"
+            gradientDuoTone="greenToBlue"
+            outline
           >
             {uploadPerc ? (
               <div className="w-16 h-16">
@@ -214,8 +215,8 @@ export default function CreatePost() {
         <Button
           disabled={uploadPerc || loading}
           type="submit"
-          gradientDuoTone="purpleToPink"
-          className="w-full"
+          gradientDuoTone="greenToBlue"
+          className="w-full "
         >
           {loading ? (
             <div className="flex gap-2">

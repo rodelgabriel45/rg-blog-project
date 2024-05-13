@@ -67,22 +67,37 @@ export default function Header() {
     <>
       <Navbar className="border-b-2 p-4">
         <Link to={"/"} className="text-lg font-bold sm:text-xl ">
-          <span className="text-white px-5 py-1 bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 rounded-lg hover:bg-gradient-to-r shadow-md">
-            Test
+          <span className="text-gray-700 px-4 py-1 bg-gradient-to-l from-[#A4E5E0] via-[#37BEB0] to-[#0C6170] rounded-lg hover:bg-gradient-to-r shadow-lg">
+            RG
           </span>
-          Project
+          Blogs
         </Link>
         <form onSubmit={handleSubmit}>
-          <TextInput
-            type="text"
-            placeholder="Search..."
-            rightIcon={HiOutlineSearch}
-            className="hidden lg:inline"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <div className="flex items-center gap-2">
+            <TextInput
+              type="text"
+              placeholder="Search Posts..."
+              className="hidden lg:inline"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Button
+              type="submit"
+              outline
+              gradientDuoTone="greenToBlue"
+              className="hidden lg:inline"
+            >
+              <HiOutlineSearch className="text-lg" />
+            </Button>
+          </div>
         </form>
-        <Button className="w-12 lg:hidden" color="gray" pill>
+        <Button
+          onClick={handleSubmit}
+          className="w-12 lg:hidden"
+          gradientDuoTone="greenToBlue"
+          pill
+          outline
+        >
           <HiOutlineSearch />
         </Button>
         <div className="flex gap-2 md:order-2">
@@ -126,7 +141,7 @@ export default function Header() {
             </Dropdown>
           ) : (
             <Link to="/signin">
-              <Button gradientDuoTone="cyanToBlue" outline>
+              <Button gradientDuoTone="greenToBlue" outline>
                 Sign In
               </Button>
             </Link>

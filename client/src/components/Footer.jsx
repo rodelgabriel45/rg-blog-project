@@ -10,11 +10,11 @@ export default function FooterComp() {
   return (
     <Footer container className="border border-t-8 border-teal-700">
       <div className="w-full max-w-7xl mx-auto">
-        <div className="mb-5">
-          <span className="text-white px-5 py-1 bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 rounded-lg hover:bg-gradient-to-r shadow-md">
-            Test
+        <div className="mb-5 font-semibold text-xl">
+          <span className="text-gray-700 px-5 py-1 bg-gradient-to-l from-[#A4E5E0] via-[#37BEB0] to-[#0C6170] rounded-lg hover:bg-gradient-to-r shadow-md">
+            RG
           </span>
-          Project
+          Blogs
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           <div>

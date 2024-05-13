@@ -140,7 +140,7 @@ export default function DashboardComponent() {
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="text-center p-2">Recent Users</h1>
             <Link to="/dashboard?tab=users">
-              <Button gradientDuoTone="purpleToBlue" outline>
+              <Button gradientDuoTone="tealToLime" outline>
                 See All
               </Button>
             </Link>
@@ -180,7 +180,7 @@ export default function DashboardComponent() {
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="text-center p-2">Recent Posts</h1>
             <Link to="/dashboard?tab=posts">
-              <Button gradientDuoTone="purpleToBlue" outline>
+              <Button gradientDuoTone="tealToLime" outline>
                 See Posts
               </Button>
             </Link>
@@ -220,7 +220,7 @@ export default function DashboardComponent() {
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="text-center p-2">Recent Comments</h1>
             <Link to="/dashboard?tab=comments">
-              <Button gradientDuoTone="purpleToBlue" outline>
+              <Button gradientDuoTone="tealToLime" outline>
                 See All
               </Button>
             </Link>

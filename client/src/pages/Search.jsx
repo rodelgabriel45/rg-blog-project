@@ -150,7 +150,12 @@ export default function Search() {
               <option value="node">Node JS</option>
             </Select>
           </div>
-          <Button type="submit" outline gradientDuoTone="purpleToPink">
+          <Button
+            type="submit"
+            outline
+            gradientDuoTone="tealToLime"
+            className="shadow-md"
+          >
             Search
           </Button>
         </form>

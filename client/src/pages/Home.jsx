@@ -26,10 +26,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold lg:text-6xl">
-          This is a Test Project
-        </h1>
-        <p className="text-gray-500 text-sm sm:text-md">
+        <h1 className="text-3xl font-bold lg:text-6xl">Welcome to RG Blogs</h1>
+        <p className="text-gray-500 text-sm sm:text-md lg:text-lg">
           Here you will find a variety of articles and tutorials on topics such
           as web development, software engineering, science and technology.
         </p>

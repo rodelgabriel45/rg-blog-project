@@ -74,13 +74,13 @@ export default function SignUpPage() {
       <div className="flex flex-col md:flex-row md:items-center p-3 max-w-3xl mx-auto gap-5">
         <div className="flex-1">
           <div className="text-4xl font-bold">
-            <span className="text-white px-5 py-1 bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 rounded-lg hover:bg-gradient-to-r shadow-md">
-              Test
+            <span className="text-gray-700 px-5 py-1 bg-gradient-to-l from-[#A4E5E0] via-[#37BEB0] to-[#0C6170] rounded-lg hover:bg-gradient-to-r shadow-md">
+              RG
             </span>
-            Project
+            Blogs
           </div>
 
-          <p className="text-sm mt-5">
+          <p className="text-sm mt-5 lg:text-lg">
             This is a demo project. You can sign up with your email and password
             or continue with Google.
           </p>
@@ -118,8 +118,9 @@ export default function SignUpPage() {
             </div>
             <Button
               disabled={loading}
-              gradientDuoTone="purpleToPink"
+              gradientDuoTone="greenToBlue"
               type="submit"
+              className="shadow-md text-black"
             >
               {loading ? (
                 <div className="flex gap-2">
