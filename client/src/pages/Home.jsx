@@ -24,7 +24,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen px-10">
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold lg:text-6xl">Welcome to RG Blogs</h1>
         <p className="text-gray-500 text-sm sm:text-md lg:text-lg">
@@ -38,7 +38,7 @@ export default function HomePage() {
           View all posts
         </Link>
       </div>
-      <div className="p-3 bg-amber-100 dark:bg-slate-700">
+      <div className=" bg-[#98D7C2] rounded-tl-full rounded-br-full shadow-lg dark:bg-slate-700">
         <CallToAction />
       </div>
       <div className="max-w-7xlxl mx-auto p-3 flex flex-col gap-8 py-7">

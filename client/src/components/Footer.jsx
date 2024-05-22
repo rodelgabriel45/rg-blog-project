@@ -21,34 +21,42 @@ export default function FooterComp() {
             <Footer.Title title="about" />
             <Footer.LinkGroup col>
               <Footer.Link className="cursor-pointer" as="div">
-                <Link to="/about">Example link 1</Link>
-              </Footer.Link>
-              <Footer.Link className="cursor-pointer">
-                Example link 2
+                <Link to="/about">About RG Blogs</Link>
               </Footer.Link>
             </Footer.LinkGroup>
           </div>
 
           <div>
-            <Footer.Title title="follow us" />
+            <Footer.Title title="follow me" />
             <Footer.LinkGroup col>
-              <Footer.Link className="cursor-pointer">
-                Example link 1
+              <Footer.Link className="cursor-pointer" as="div">
+                <Link
+                  to="https://github.com/rodelgabriel45"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github
+                </Link>
               </Footer.Link>
-              <Footer.Link className="cursor-pointer">
-                Example link 2
+              <Footer.Link className="cursor-pointer" as="div">
+                <Link
+                  to="https://www.facebook.com/rodelgabriel45/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Facebook
+                </Link>
               </Footer.Link>
             </Footer.LinkGroup>
           </div>
 
           <div>
-            <Footer.Title title="legal" />
+            <Footer.Title title="contact" />
             <Footer.LinkGroup col>
-              <Footer.Link className="cursor-pointer">
-                Example link 1
-              </Footer.Link>
-              <Footer.Link className="cursor-pointer">
-                Example link 2
+              <Footer.Link className="cursor-pointer" as="div">
+                <Link to="mailto:rodelgabriel45@gmail.com">
+                  rodelgabriel45@gmail.com
+                </Link>
               </Footer.Link>
             </Footer.LinkGroup>
           </div>
@@ -63,9 +71,12 @@ export default function FooterComp() {
           <div className="flex gap-2 mt-2 sm:justify-center">
             <Footer.Icon
               className="hover:text-blue-700"
-              href="#"
+              href="https://www.facebook.com/rodelgabriel45/"
+              target="_blank"
+              rel="noopener noreferrer"
               icon={FaFacebook}
             />
+
             <Footer.Icon
               className="hover:text-blue-700"
               href="#"
@@ -78,7 +89,7 @@ export default function FooterComp() {
             />
             <Footer.Icon
               className="hover:text-blue-700"
-              href="#"
+              href="mailto:rodelgabriel45@gmail.com"
               icon={BiLogoGmail}
             />
           </div>
